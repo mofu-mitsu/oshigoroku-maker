@@ -1,0 +1,282 @@
+/* ベースやレイアウトはそのまま */
+:root {
+    --primary-color: #ff6b81;
+    --bg-color: #f8f9fa;
+    --panel-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --card-main-color: #ffb6c1;
+    --card-text-color: #333333;
+}
+body { font-family: 'Zen Maru Gothic', sans-serif; background-color: var(--bg-color); color: #333; margin: 0; padding: 20px; }
+.header { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 30px; flex-wrap: wrap; gap: 15px; }
+.header-title h1 { margin: 0; font-size: 28px; color: #ff6b81; }
+.header-btn { background: #fff; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.header-btn:hover { background: #fff0f5; }
+.app-container { display: flex; max-width: 1200px; margin: 0 auto; gap: 30px; align-items: flex-start; }
+@media (max-width: 850px) { .app-container { flex-direction: column; } .left-panel, .right-panel { width: 100% !important; } }
+.left-panel { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+.setting-section { background: var(--panel-bg); padding: 25px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid var(--border-color); }
+.setting-section h2 { font-size: 18px; margin: 0 0 20px; border-bottom: 2px dashed #f0f0f0; padding-bottom: 10px; }
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 8px; color: #555; }
+.input-group input[type="text"], .input-group textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 15px; font-family: 'Zen Maru Gothic', sans-serif; box-sizing: border-box; background: #fdfdfd; transition: 0.2s; }
+
+/* 🌸 ファイル選択の激カワ化！ */
+.kawaii-upload {
+    background: #fff0f5; border: 2px dashed #ff9ebd; border-radius: 16px;
+    padding: 25px; text-align: center; cursor: pointer; color: #ff6b81;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: all 0.3s ease; box-shadow: inset 0 0 10px rgba(255,182,193,0.2);
+}
+.kawaii-upload:hover { background: #ffe4e1; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,182,193,0.4); }
+.kawaii-bounce { font-size: 30px; margin-bottom: 8px; transition: transform 0.3s; }
+.kawaii-upload:hover .kawaii-bounce { transform: scale(1.2) rotate(5deg); }
+.upload-title { font-weight: bold; font-size: 16px; margin-bottom: 4px; }
+.upload-sub { font-size: 11px; color: #ff9ebd; }
+input[type="file"] { display: none; }
+.image-upload-area { display: flex; gap: 15px; align-items: center; }
+.preview-icon-wrapper { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+.preview-icon-wrapper img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-color); }
+.remove-icon-btn { position: absolute; top: -5px; right: -5px; background: #333; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; }
+
+/* 📝 語録追加ボタン */
+.add-quote-btn { width: 100%; padding: 12px; background: white; border: 2px dashed #7c5cff; color: #7c5cff; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.add-quote-btn:hover { background: #f0ebf8; }
+.quote-group { position: relative; }
+.quote-remove-btn { position: absolute; top: -10px; right: -10px; background: #ff4757; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; z-index: 10; display: none; }
+.quote-group:hover .quote-remove-btn { display: block; }
+
+/* テーマ・カラー */
+.theme-selector { display: flex; gap: 10px; flex-wrap: wrap; }
+.theme-option { cursor: pointer; text-align: center; font-size: 12px; font-weight: bold; color: #666; }
+.theme-thumb { width: 60px; height: 60px; border-radius: 8px; margin-bottom: 5px; transition: 0.2s; border: 2px solid transparent; }
+.theme-option.active .theme-thumb { border-color: var(--primary-color); transform: scale(1.05); }
+.kawaii-thumb { background: #fff0f5; border: 2px dashed #ffb6c1 !important; }
+.kira-thumb { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+.cyber-thumb { background: linear-gradient(to bottom, #0f2027, #2c5364); }
+.book-thumb { background: #faf4e8; border: 1px solid #d4c4a8 !important; }
+.color-settings { display: flex; gap: 15px; } .half { flex: 1; }
+.color-input-wrap { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 8px; background: #fafafa; }
+input[type="color"] { border: none; width: 30px; height: 30px; padding: 0; border-radius: 4px; cursor: pointer; }
+
+/* 🌟 右パネル＆カード本体 */
+.right-panel { flex: 1; min-width: 400px; display: flex; flex-direction: column; }
+.preview-header { font-weight: bold; margin-bottom: 10px; color: #555; }
+.card-wrapper { display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+.card { width: 100%; max-width: 420px; aspect-ratio: 3 / 4; border-radius: 16px; padding: 30px; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
+.card-inner { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 2; }
+.card-top-deco { font-size: 30px; color: var(--card-main-color); margin-bottom: -15px; z-index: 3; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.card-icon-area { margin-bottom: 20px; z-index: 3; }
+.card-icon-area img, .icon-placeholder { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--card-main-color); background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.icon-placeholder { display: flex; justify-content: center; align-items: center; font-size: 40px; color: #ccc; }
+
+/* 語録エリア（複数対応） */
+.quote-box { background: rgba(255, 255, 255, 0.95); border: 2px solid var(--card-main-color); border-radius: 16px; padding: 30px 20px; width: 90%; text-align: center; position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.05); margin-bottom: 30px; }
+.quote-text-container { display: flex; flex-direction: column; gap: 15px; }
+.quote-text { font-size: 20px; font-weight: 700; line-height: 1.6; color: var(--card-text-color); white-space: pre-wrap; word-wrap: break-word; position: relative; z-index: 2; }
+/* 複数語録の間に破線 */
+.quote-text:not(:last-child)::after { content: ""; display: block; width: 50%; height: 1px; border-bottom: 2px dotted var(--card-main-color); margin: 15px auto -10px; opacity: 0.5; }
+
+.quote-mark { position: absolute; font-size: 40px; color: var(--card-main-color); background: #fff; padding: 0 10px; z-index: 3; }
+.quote-mark-left { top: -22px; left: -10px; }
+.quote-mark-right { bottom: -22px; right: -10px; }
+
+/* 🎀 量産系文字が見えない問題の解決！白光彩で文字を際立たせる！ */
+.info-area { text-align: center; color: var(--card-main-color); z-index: 3; }
+.character { font-size: 26px; font-weight: bold; display: flex; align-items: center; gap: 8px; justify-content: center; text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 0 4px 10px rgba(0,0,0,0.1); }
+.work { font-size: 14px; margin-top: 5px; font-weight: bold; text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; }
+.deco-icon { font-size: 16px; opacity: 0.9; }
+
+/* =========================================
+   🎨 テーマ背景パターン（html2canvas対応版）
+========================================= */
+/* 🎀 新・量産系（フリルと二重線で絶対描画させる！） */
+.theme-kawaii {
+    background-color: #fff0f5; /* ベースの薄ピンク */
+    border: 12px double var(--card-main-color); /* 可愛い二重線 */
+    box-shadow: inset 0 0 0 10px #ffffff; /* 内側の白いフリル風枠 */
+}
+/* キラキラアイドル */
+.theme-kira { background: linear-gradient(135deg, #ffffff 0%, var(--card-main-color) 100%); }
+/* サイバー */
+.theme-cyber { background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); --card-text-color: #ffffff !important; }
+.theme-cyber .quote-box { background: rgba(0,0,0,0.6); border-color: #00ffff; }
+.theme-cyber .quote-text { color: #fff; }
+.theme-cyber .character, .theme-cyber .work, .theme-cyber .quote-mark, .theme-cyber .card-top-deco { color: #00ffff; text-shadow: 0 0 10px #00ffff; }
+/* 本風 */
+.theme-book { background: #faf4e8; border: 2px solid #d4c4a8; font-family: 'Shippori Mincho', serif; }
+.theme-book .quote-box { box-shadow: none; border-style: double; border-width: 4px; }
+
+/* アクションボタン */
+.action-buttons { display: flex; gap: 10px; margin-bottom: 20px; }
+.action-btn { flex: 1; padding: 14px; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; font-family: 'Zen Maru Gothic', sans-serif; transition: 0.2s; }
+.download-btn { background: var(--primary-color); color: white; border: none; }
+.copy-btn { background: white; border: 2px solid var(--primary-color); color: var(--primary-color); }
+.download-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,107,129,0.3); }
+.copy-btn:hover { background: #fff0f5; }
+
+/* 💡 トースト通知（激カワポップアップ） */
+#toast {
+    visibility: hidden; min-width: 280px; background: linear-gradient(45deg, #ff6b81, #ff9ebd);
+    color: #fff; text-align: center; border-radius: 50px; padding: 15px 20px;
+    position: fixed; z-index: 1000; left: 50%; bottom: 20px;
+    transform: translateX(-50%) translateY(20px); font-weight: bold; font-size: 15px;
+    box-shadow: 0 5px 20px rgba(255,107,129, 0.4); opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+#toast.show { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(-20px); }
+
+/* 📖 使い方モーダル */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+.modal-overlay.active { display: flex; }
+.modal-content { background: white; padding: 30px; border-radius: 24px; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.2); animation: popIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28); }
+@keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.modal-content h2 { color: var(--primary-color); margin-top: 0; font-size: 20px; text-align: center; }
+.modal-content ol { padding-left: 20px; color: #555; line-height: 1.8; }
+.modal-content li { margin-bottom: 10px; }
+.close-modal-btn { background: var(--primary-color); color: white; border: none; padding: 12px; width: 100%; border-radius: 50px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 15px; }
+
+/* 楽天APIフッター */
+.rakuten-ad-container { max-width: 1200px; margin: 40px auto; padding: 20px; background: white; border-radius: 16px; text-align: center; border: 2px dashed #ffb6c1; }
+
+/* ベース変数 */
+:root {
+    --primary-color: #ff6b81;
+    --bg-color: #f8f9fa;
+    --panel-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --card-main-color: #ffb6c1;
+    --card-text-color: #333333;
+}
+
+body { font-family: 'Zen Maru Gothic', sans-serif; background-color: var(--bg-color); color: #333; margin: 0; padding: 20px; }
+
+/* ヘッダー */
+.header { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 30px; flex-wrap: wrap; gap: 15px; }
+.header-title h1 { margin: 0; font-size: 28px; color: #ff6b81; }
+.header-title p { margin: 5px 0 0; color: #666; font-size: 14px; }
+.header-links { display: flex; gap: 10px; }
+.header-btn { background: #fff; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.header-btn:hover { background: #fff0f5; }
+
+/* レイアウト */
+.app-container { display: flex; max-width: 1200px; margin: 0 auto; gap: 30px; align-items: flex-start; }
+.left-panel { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+.setting-section { background: var(--panel-bg); padding: 25px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid var(--border-color); }
+.setting-section h2 { font-size: 18px; margin: 0 0 20px; border-bottom: 2px dashed #f0f0f0; padding-bottom: 10px; }
+
+/* フォーム部品 */
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 8px; color: #555; }
+.input-group input[type="text"], .input-group textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 15px; font-family: 'Zen Maru Gothic', sans-serif; box-sizing: border-box; background: #fdfdfd; transition: 0.2s; }
+.input-group input:focus, .input-group textarea:focus { outline: none; border-color: var(--card-main-color); background: #fff; }
+
+/* 画像アップロード部 */
+.kawaii-upload { background: #fff0f5; border: 2px dashed #ff9ebd; border-radius: 16px; padding: 25px; text-align: center; cursor: pointer; color: #ff6b81; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.3s ease; }
+.kawaii-upload:hover { background: #ffe4e1; transform: translateY(-2px); }
+.kawaii-bounce { font-size: 30px; margin-bottom: 8px; transition: transform 0.3s; }
+.kawaii-upload:hover .kawaii-bounce { transform: scale(1.2) rotate(5deg); }
+.upload-title { font-weight: bold; font-size: 16px; margin-bottom: 4px; }
+.upload-sub { font-size: 11px; color: #ff9ebd; }
+input[type="file"] { display: none; }
+.image-upload-area { display: flex; gap: 15px; align-items: center; }
+.preview-icon-wrapper { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+.preview-icon-wrapper img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-color); }
+.remove-icon-btn { position: absolute; top: -5px; right: -5px; background: #333; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; }
+
+/* 語録追加＆リセットボタン */
+.add-quote-btn { width: 100%; padding: 12px; background: white; border: 2px dashed #7c5cff; color: #7c5cff; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.add-quote-btn:hover { background: #f0ebf8; }
+.quote-group { position: relative; }
+.quote-remove-btn { position: absolute; top: -10px; right: -10px; background: #ff4757; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; z-index: 10; display: none; }
+.quote-group:hover .quote-remove-btn { display: block; }
+.reset-btn { width: 100%; padding: 14px; background: white; border: 2px solid #ff4757; color: #ff4757; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 15px; }
+.reset-btn:hover { background: #ffeaea; }
+
+/* テーマ・カラー */
+.theme-selector { display: flex; gap: 10px; flex-wrap: wrap; }
+.theme-option { cursor: pointer; text-align: center; font-size: 12px; font-weight: bold; color: #666; }
+.theme-thumb { width: 60px; height: 60px; border-radius: 8px; margin-bottom: 5px; transition: 0.2s; border: 2px solid transparent; }
+.theme-option.active .theme-thumb { border-color: var(--primary-color); transform: scale(1.05); }
+.kawaii-thumb { background: #fff0f5; border: 2px dashed #ffb6c1 !important; }
+.kira-thumb { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+.cyber-thumb { background: linear-gradient(to bottom, #0f2027, #2c5364); }
+.book-thumb { background: #faf4e8; border: 1px solid #d4c4a8 !important; }
+.color-settings { display: flex; gap: 15px; } .half { flex: 1; }
+.color-input-wrap { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 8px; background: #fafafa; }
+input[type="color"] { border: none; width: 30px; height: 30px; padding: 0; border-radius: 4px; cursor: pointer; }
+
+/* 右パネル＆カード本体 */
+.right-panel { flex: 1; min-width: 400px; display: flex; flex-direction: column; }
+.preview-header { font-weight: bold; margin-bottom: 10px; color: #555; }
+.card-wrapper { display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+.card { width: 100%; max-width: 420px; aspect-ratio: 3 / 4; border-radius: 16px; padding: 30px; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
+.card-inner { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 2; }
+.card-top-deco { font-size: 30px; color: var(--card-main-color); margin-bottom: -15px; z-index: 3; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.card-icon-area { margin-bottom: 20px; z-index: 3; }
+.card-icon-area img, .icon-placeholder { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--card-main-color); background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.icon-placeholder { display: flex; justify-content: center; align-items: center; font-size: 40px; color: #ccc; }
+.quote-box { background: rgba(255, 255, 255, 0.95); border: 2px solid var(--card-main-color); border-radius: 16px; padding: 30px 20px; width: 90%; text-align: center; position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.05); margin-bottom: 30px; }
+.quote-text-container { display: flex; flex-direction: column; gap: 15px; }
+.quote-text { font-size: 20px; font-weight: 700; line-height: 1.6; color: var(--card-text-color); white-space: pre-wrap; word-wrap: break-word; position: relative; z-index: 2; }
+.quote-text:not(:last-child)::after { content: ""; display: block; width: 50%; height: 1px; border-bottom: 2px dotted var(--card-main-color); margin: 15px auto -10px; opacity: 0.5; }
+.quote-mark { position: absolute; font-size: 40px; color: var(--card-main-color); background: #fff; padding: 0 10px; z-index: 3; }
+.quote-mark-left { top: -22px; left: -10px; }
+.quote-mark-right { bottom: -22px; right: -10px; }
+.info-area { text-align: center; color: var(--card-main-color); z-index: 3; }
+.character { font-size: 26px; font-weight: bold; display: flex; align-items: center; gap: 8px; justify-content: center; text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 0 4px 10px rgba(0,0,0,0.1); }
+.work { font-size: 14px; margin-top: 5px; font-weight: bold; text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; }
+.deco-icon { font-size: 16px; opacity: 0.9; }
+
+/* テーマ */
+.theme-kawaii { background-color: #fff0f5; border: 12px double var(--card-main-color); box-shadow: inset 0 0 0 10px #ffffff; }
+.theme-kira { background: linear-gradient(135deg, #ffffff 0%, var(--card-main-color) 100%); }
+.theme-cyber { background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); --card-text-color: #ffffff !important; }
+.theme-cyber .quote-box { background: rgba(0,0,0,0.6); border-color: #00ffff; }
+.theme-cyber .quote-text { color: #fff; }
+.theme-cyber .character, .theme-cyber .work, .theme-cyber .quote-mark, .theme-cyber .card-top-deco { color: #00ffff; text-shadow: 0 0 10px #00ffff; }
+.theme-book { background: #faf4e8; border: 2px solid #d4c4a8; font-family: 'Shippori Mincho', serif; }
+.theme-book .quote-box { box-shadow: none; border-style: double; border-width: 4px; }
+
+/* 🌟 アクションボタン（シェア復活） */
+.action-buttons { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.action-btn { flex: 1; min-width: 100px; padding: 14px; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; font-family: 'Zen Maru Gothic', sans-serif; transition: 0.2s; }
+.download-btn { background: var(--primary-color); color: white; border: none; }
+.copy-btn { background: white; border: 2px solid var(--primary-color); color: var(--primary-color); }
+.share-btn { background: #1da1f2; color: white; border: none; }
+.download-btn:hover, .share-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.copy-btn:hover { background: #fff0f5; }
+
+/* 🌟 ワンポイントアドバイス */
+.advice-box { background: #fdf5e6; border: 1px solid #ffe4b5; padding: 15px; border-radius: 8px; font-size: 13px; color: #8b6b43; }
+.advice-box p { margin: 0 0 5px; color: #d2691e; }
+.advice-box ul { margin: 0; padding-left: 20px; }
+
+/* 🌟 トースト通知＆モーダル */
+#toast { visibility: hidden; min-width: 280px; background: linear-gradient(45deg, #ff6b81, #ff9ebd); color: #fff; text-align: center; border-radius: 50px; padding: 15px 20px; position: fixed; z-index: 1000; left: 50%; bottom: 20px; transform: translateX(-50%) translateY(20px); font-weight: bold; font-size: 15px; box-shadow: 0 5px 20px rgba(255,107,129, 0.4); opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+#toast.show { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(-20px); }
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+.modal-overlay.active { display: flex; }
+.modal-content { background: white; padding: 30px; border-radius: 24px; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+.modal-content h2 { color: var(--primary-color); margin-top: 0; font-size: 20px; text-align: center; }
+.modal-content ol { padding-left: 20px; color: #555; line-height: 1.8; }
+.modal-content li { margin-bottom: 10px; }
+.close-modal-btn { background: var(--primary-color); color: white; border: none; padding: 12px; width: 100%; border-radius: 50px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 15px; }
+
+/* 楽天API */
+.rakuten-ad-container { max-width: 1200px; margin: 40px auto; padding: 20px; background: white; border-radius: 16px; text-align: center; border: 2px dashed #ffb6c1; }
+
+/* =========================================
+   📱 スマホ用レスポンシブ（神UI）
+========================================= */
+@media (max-width: 850px) {
+    .app-container { flex-direction: column; gap: 20px; }
+    .left-panel, .right-panel { width: 100% !important; min-width: 100%; }
+    
+    /* 🌟 プレビューを画面の上部に持ってくる魔法！ */
+    .right-panel { order: -1; margin-bottom: 10px; }
+    
+    .header-title h1 { font-size: 22px; }
+    .action-buttons { flex-direction: column; }
+    .card { padding: 20px; }
+    .quote-text { font-size: 18px; }
+}
