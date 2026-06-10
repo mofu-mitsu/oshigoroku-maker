@@ -264,7 +264,60 @@ input[type="color"] { border: none; width: 30px; height: 30px; padding: 0; borde
 
 /* 楽天API */
 .rakuten-ad-container { max-width: 1200px; margin: 40px auto; padding: 20px; background: white; border-radius: 16px; text-align: center; border: 2px dashed #ffb6c1; }
+/* =========================================
+   修正部分：カード本体（伸びる魔法を付与！）
+========================================= */
+.card { 
+    width: 100%; 
+    max-width: 420px; 
+    /* 🌟 ここがポイント！固定比率をやめて、最低限の高さを指定＆自動で伸びるように！ */
+    min-height: 560px; 
+    height: auto; 
+    
+    border-radius: 16px; 
+    padding: 30px; 
+    box-sizing: border-box; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+    position: relative; 
+    overflow: hidden; 
+    display: flex; 
+    flex-direction: column; 
+    transition: 0.3s; 
+}
 
+.card-inner { 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    
+    /* 🌟 ここもポイント！中央揃えにしつつ、要素間の隙間を明示的に指定！ */
+    justify-content: center; 
+    gap: 15px; /* 要素同士の隙間を固定することで保存時のズレを防止！ */
+    
+    position: relative; 
+    z-index: 2; 
+    flex: 1; /* 親要素に合わせて中身も伸びる！ */
+}
+
+/* 🌟 gap（隙間）で管理するようにしたから、下のmargin-bottomを調整 */
+.card-icon-area { 
+    margin-bottom: 5px; /* 元の20pxから減らす */
+    z-index: 3; 
+}
+
+.quote-box { 
+    background: rgba(255, 255, 255, 0.95); 
+    border: 2px solid var(--card-main-color); 
+    border-radius: 16px; 
+    padding: 30px 20px; 
+    width: 90%; 
+    text-align: center; 
+    position: relative; 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05); 
+    margin-bottom: 10px; /* 元の30pxから減らす */
+}
 /* =========================================
    📱 スマホ用レスポンシブ（神UI）
 ========================================= */
